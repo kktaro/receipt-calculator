@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../extension/double_extension.dart';
 import 'ammount.dart';
-import 'extension/double_extension.dart';
 import 'tax.dart';
 
 part 'generated/item.freezed.dart';
