@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import 'ammount.dart';
 import 'extension/double_extension.dart';
 import 'tax.dart';
 
@@ -15,8 +16,9 @@ class Item with _$Item {
   const Item._();
 
   /// 税込価格を取得する
-  double getAmmount() =>
-      (price.value + price.value * tax.rate).roundAsSignificant();
+  Ammount getAmmount() => Ammount(
+        value: (price.value + price.value * tax.rate).roundAsSignificant(),
+      );
 }
 
 @freezed

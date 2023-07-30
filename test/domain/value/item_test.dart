@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:receipt_calculator/domain/value/ammount.dart';
 import 'package:receipt_calculator/domain/value/item.dart';
 import 'package:receipt_calculator/domain/value/tax.dart';
 
@@ -13,12 +14,12 @@ void main() {
 
       test('整数の値段の価格が正常に取得できること', () {
         final item = createItem(100);
-        expect(item.getAmmount(), 110);
+        expect(item.getAmmount(), const Ammount(value: 110));
       });
 
       test('小数の値段の価格が正常に取得できること', () {
         final item = createItem(100.1);
-        expect(item.getAmmount(), 110.11);
+        expect(item.getAmmount(), const Ammount(value: 110.11));
       });
     });
 
@@ -31,12 +32,12 @@ void main() {
 
       test('整数の値段の価格が正常に取得できること', () {
         final item = createItem(100);
-        expect(item.getAmmount(), 108);
+        expect(item.getAmmount(), const Ammount(value: 108));
       });
 
       test('小数の値段の価格が正常に取得できること', () {
         final item = createItem(100.1);
-        expect(item.getAmmount(), 108.108);
+        expect(item.getAmmount(), const Ammount(value: 108.108));
       });
     });
   });
