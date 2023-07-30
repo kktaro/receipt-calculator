@@ -1,5 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/extension/ammounts_extension.dart';
 import '../../domain/value/ammount.dart';
@@ -7,20 +7,18 @@ import '../../domain/value/item.dart';
 import '../../domain/value/payment.dart';
 import 'receipt_state.dart';
 
-final receiptNotifierProvider =
-    StateNotifierProvider<ReceiptNotifier, ReceiptState>((ref) {
-  return ReceiptNotifier();
-});
+part 'generated/receipt.g.dart';
 
-class ReceiptNotifier extends StateNotifier<ReceiptState> {
-  ReceiptNotifier()
-      : super(
-          const ReceiptState(
-            items: [],
-            payment: Payment.other,
-            total: Ammount(value: 0),
-          ),
-        );
+@riverpod
+class Receipt extends _$Receipt {
+  @override
+  ReceiptState build() {
+    return const ReceiptState(
+      items: [],
+      payment: Payment.other,
+      total: Ammount(value: 0),
+    );
+  }
 
   void addItem(Item item) {
     final resultItems = [...state.items, item];
