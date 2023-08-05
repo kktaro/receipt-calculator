@@ -16,4 +16,10 @@ ThemeData _createThemeDate(Brightness brightness) => ThemeData(
       colorSchemeSeed: Colors.lime,
       fontFamily: 'Noto Sans JP',
       useMaterial3: true,
+      inputDecorationTheme: const InputDecorationTheme(
+        border: OutlineInputBorder(
+          // 角丸
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
+      ),
     );
