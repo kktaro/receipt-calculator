@@ -37,11 +37,14 @@ void main() {
         null,
         const ReceiptState(
           items: [],
-          payment: Payment.other,
+          payment: Payment.goca,
           total: Ammount(value: 0),
         ),
       ),
     );
+
+    // テストのため、初期値をその他に設定する
+    receipt.changePayment(Payment.other);
   }
 
   void checkState(List<Item> items, Ammount total, Payment payment) {
