@@ -15,6 +15,12 @@ class Item with _$Item {
   }) = _Item;
   const Item._();
 
+  factory Item.initial() => const Item(
+        name: ItemName(value: ''),
+        price: WithoutTaxPrice(value: 0),
+        tax: Tax.reduced,
+      );
+
   /// 税込価格を取得する
   Ammount getAmmount() => Ammount(
         value: (price.value + price.value * tax.rate).roundAsSignificant(),
