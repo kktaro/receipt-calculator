@@ -45,9 +45,12 @@ void main() {
   }
 
   void checkState(List<Item> items, Ammount total, Payment payment) {
-    verify(listener.call(
-            any, ReceiptState(items: items, payment: payment, total: total)))
-        .called(1);
+    verify(
+      listener.call(
+        any,
+        ReceiptState(items: items, payment: payment, total: total),
+      ),
+    ).called(1);
   }
 
   Item createItem(String name, double price, Tax tax) => Item(
@@ -107,7 +110,10 @@ void main() {
         receipt.editItem(1, newItem);
 
         checkState(
-            [item1, newItem, item3], const Ammount(value: 1540), Payment.other);
+          [item1, newItem, item3],
+          const Ammount(value: 1540),
+          Payment.other,
+        );
       });
 
       test('goca支払い時の計算が正しく行えること', () {
@@ -118,8 +124,11 @@ void main() {
         receipt.editItem(1, newItem);
         receipt.changePayment(Payment.goca);
 
-        checkState([item1, newItem, item3], const Ammount(value: 1509.2),
-            Payment.goca);
+        checkState(
+          [item1, newItem, item3],
+          const Ammount(value: 1509.2),
+          Payment.goca,
+        );
       });
     });
   });
