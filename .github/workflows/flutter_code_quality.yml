@@ -27,8 +27,11 @@ jobs:
       - name: Analyze
         run: flutter analyze
         
-      - name: Format
+      - name: Format lib
         run: dart format -o none --set-exit-if-changed ./lib
+
+      - name: Format test
+        run: dart format -o none --set-exit-if-changed ./test
         
       - name: Test
         run: flutter test
