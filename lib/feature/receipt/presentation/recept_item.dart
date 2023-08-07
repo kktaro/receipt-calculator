@@ -24,7 +24,8 @@ class ReceiptItem extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final item = ref.watch(currentItem);
     final nameController = useTextEditingController(text: item.name.value);
-    final priceController = useTextEditingController(text: item.price.value.toStringOrEmpty());
+    final priceController =
+        useTextEditingController(text: item.price.value.toStringOrEmpty());
 
     return ListTile(
       title: TextField(
