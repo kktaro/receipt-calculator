@@ -1,31 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../domain/extension/double_extension.dart';
 import '../../../domain/value/item.dart';
 
-class ReceiptItem extends ConsumerWidget {
+final currentItem = Provider<Item>((ref) => throw UnimplementedError());
+
+class ReceiptItem extends HookConsumerWidget {
   const ReceiptItem({
     super.key,
-    required this.item,
     required this.onChangeName,
     required this.onChangePrice,
     required this.onToggleTax,
   });
 
-  final Item item;
   final void Function(ItemName) onChangeName;
   final void Function(WithoutTaxPrice) onChangePrice;
   final void Function() onToggleTax;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final item = ref.watch(currentItem);
+    final nameController = useTextEditingController(text: item.name.value);
+    final priceController =
+        useTextEditingController(text: item.price.value.toStringOrEmpty());
+
     return ListTile(
       title: TextField(
         decoration: const InputDecoration(
           hintText: '商品名(任意)',
         ),
         onChanged: (value) => onChangeName(ItemName(value: value)),
+        controller: nameController,
       ),
       subtitle: Column(
         children: [
@@ -44,6 +52,7 @@ class ReceiptItem extends ConsumerWidget {
                     final input = value.isEmpty ? '0' : value;
                     onChangePrice(WithoutTaxPrice(value: double.parse(input)));
                   },
+                  controller: priceController,
                 ),
               ),
               TextButton(
