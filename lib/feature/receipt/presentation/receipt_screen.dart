@@ -23,14 +23,17 @@ class ReceiptScreen extends ConsumerWidget {
             child: ListView.separated(
               itemBuilder: (context, index) {
                 final target = state.items[index];
-
-                return ReceiptItem(
-                  item: target,
-                  onChangeName: (value) =>
-                      receiptNotifier.editName(index, value),
-                  onChangePrice: (value) =>
-                      receiptNotifier.editPrice(index, value),
-                  onToggleTax: () => receiptNotifier.toggleTax(index),
+                return ProviderScope(
+                  overrides: [
+                    currentItem.overrideWithValue(target),
+                  ],
+                  child: ReceiptItem(
+                    onChangeName: (value) =>
+                        receiptNotifier.editName(index, value),
+                    onChangePrice: (value) =>
+                        receiptNotifier.editPrice(index, value),
+                    onToggleTax: () => receiptNotifier.toggleTax(index),
+                  ),
                 );
               },
               separatorBuilder: (_, __) => const Divider(),
